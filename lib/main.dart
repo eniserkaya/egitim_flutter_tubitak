@@ -18,22 +18,13 @@ class FirstScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Merhaba Flutter'),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: Text(
-              'Eğitime Hoşgeldiniz.',
-              style: TextStyle(fontSize: 40.0),
-            ),
-          ),
-          ElevatedButton(
-            onPressed: _butonaBasildi,
-            child: Text('Button 1'),
-            style: ElevatedButton.styleFrom(
-                primary: Colors.black, onPrimary: Colors.red),
-          )
-        ],
+      body: Center(
+        child: Column(
+          children: [
+            myTextWidget(),
+            myImageWidget()
+          ],
+        ),
       ),
       drawer: Drawer(
         child: ListView(
@@ -55,13 +46,31 @@ class FirstScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _butonaBasildi,
-        child: Text('+'),
-      ),
+          onPressed: _butonaBasildi, child: Icon(Icons.ac_unit)),
     );
   }
 
   void _butonaBasildi() {
     print('Bastin');
+  }
+
+  myTextWidget() {
+    return Text('TextWidget Ornek',
+    style: TextStyle(
+      fontSize:20,
+      fontWeight: FontWeight.bold,
+      letterSpacing: 2.0,
+      fontFamily: 'Lacquer'
+    ),);
+  }
+
+  myImageWidget(){
+    return Image.asset("assets/images/indir.png");
+  }
+
+  myNetworkImageWidget(){
+    return Image(
+      image: NetworkImage('htt')
+    );
   }
 }
