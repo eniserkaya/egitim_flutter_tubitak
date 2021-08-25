@@ -18,12 +18,20 @@ class FirstScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Merhaba Flutter'),
       ),
-      body: Center(
-        child: Column(
-          children: [
-            myTextWidget(),
-            myImageWidget()
-          ],
+      body: SafeArea(
+        child: Center(
+          child: Container(
+            child: FutureBuilder<String>(
+              future: _futureOrnek(),
+              initialData: 'Future cevap bekleniyor',
+              builder: (BuildContext context, AsyncSnapshot<String> snapshot){
+                if(snapshot.connectionState == ConnectionState.waiting){
+                  return CircularProgressIndicator();
+                }
+                return Text(snapshot.data!);
+              }
+            ),
+          )
         ),
       ),
       drawer: Drawer(
@@ -72,5 +80,10 @@ class FirstScreen extends StatelessWidget {
     return Image(
       image: NetworkImage('htt')
     );
+  }
+
+  Future<String> _futureOrnek() async {
+    await Future.delayed(Duration(seconds: 3));
+    return Future.value('TÜBİTAK Flutter Eğitimi');
   }
 }
